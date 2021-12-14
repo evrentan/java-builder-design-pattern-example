@@ -1,12 +1,14 @@
 package evrentan.examples;
 
-public class Person {
+import java.util.Objects;
+
+public class PersonWithBuilder {
   private String firstName;
   private String lastName;
   private Integer age;
   private String sex;
 
-  private Person(PersonBuilder personBuilder) {
+  private PersonWithBuilder(PersonBuilder personBuilder) {
     this.firstName = personBuilder.firstName;
     this.lastName = personBuilder.lastName;
     this.age = personBuilder.age;
@@ -15,11 +17,11 @@ public class Person {
 
   @Override
   public String toString() {
-    return "Person{" +
-        "firstName='" + firstName + '\'' +
-        ", lastName='" + lastName + '\'' +
-        ", age=" + age +
-        ", sex='" + sex + '\'' +
+    return "PersonWithConstructor{" +
+        (Objects.nonNull(firstName) ? "firstName='" + firstName + '\'' : "") +
+        (Objects.nonNull(lastName) ? ", lastName='" + lastName + '\'' : "") +
+        (Objects.nonNull(age) ? ", age=" + age : "") +
+        (Objects.nonNull(sex) ? ", sex='" + sex + '\'' : "") +
         '}';
   }
 
@@ -53,8 +55,8 @@ public class Person {
       return this;
     }
 
-    public Person build() {
-      return new Person(this);
+    public PersonWithBuilder build() {
+      return new PersonWithBuilder(this);
     }
   }
 }
